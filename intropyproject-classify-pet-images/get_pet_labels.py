@@ -54,5 +54,5 @@ def get_pet_labels(image_dir):
               results_dic[idx]=lower(in_files[idx])
               
 
-
+              
     return None
