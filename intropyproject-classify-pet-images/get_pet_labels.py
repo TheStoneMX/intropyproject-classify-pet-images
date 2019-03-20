@@ -51,8 +51,25 @@ def get_pet_labels(image_dir):
     
     for idx in range(0, len(in_files), 1):
          if in_files[idx][0] != '.':
-              results_dic[idx]=lower(in_files[idx])
-              
+              pet_label = ""
 
+              # Label: with only lower case letters
+              pet_label = in_files[idx].lower()
+
+              # Blank space separating each word in a label composed of multiple words
+              pet_label_tmp = ''
+              pet_label=pet_label.split('.')
+              for i in range(0,len(pet_label[0]),1):
+                   if(pet_label[0][i].isalpha()):
+                        pet_label_tmp = pet_label_tmp + pet_label[0][i]
+               
+              pet_label = pet_label_tmp
+              pet_label = pet_label.replace('_',' ')
               
-    return None
+              # Whitespace characters stripped from front & end of label
+              if in_files[idx] not in results_dic:
+                   results_dic[in_files[idx]] = [pet_label]
+              else:
+                  print("** Warning: Duplicate files exist in directory:", in_files[idx])
+
+    return results_dic
